@@ -1,14 +1,18 @@
 package de.golde.developer.developer.persistence;
 
 import de.golde.developer.developer.DeveloperAdapter;
-import de.golde.developer.developer.model.DeveloperWithRepos;
+import de.golde.developer.developer.model.Developer;
+import de.golde.developer.developer.model.DeveloperWithRepositories;
 import de.golde.developer.developer.model.Repository;
+import lombok.val;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.function.Function;
 import java.util.stream.Stream;
 
+import static java.util.stream.Collectors.collectingAndThen;
 import static java.util.stream.Collectors.toList;
 
 @Component
@@ -21,17 +25,18 @@ class DeveloperJpaRepositoryAdapter implements DeveloperAdapter {
     }
 
     @Override
-    public Stream<DeveloperWithRepos> getDevelopersWithRepositories() {
-        return developerRepository.findAllWithRepositories().stream().map(toDomainModel);
+    public Stream<DeveloperWithRepositories> getDevelopersWithRepositories() {
+        return Stream.of();
     }
 
-    private final Function<DeveloperJpaEntity, List<Repository>> repositories = jpaEntity ->
-            jpaEntity.getRepositories().stream().map(it -> new Repository("", it.url, it.language)).collect(toList());
+    @Override
+    public Stream<Developer> saveAllDevelopers(List<Developer> developers) {
+        val savedDevelopers = developers.stream().map(toJpaEntity).collect(collectingAndThen(toList(), developerRepository::saveAll));
+        return savedDevelopers.stream().map(toDDeveloperModel);
+    }
 
-    private final Function<DeveloperJpaEntity, DeveloperWithRepos> toDomainModel = jpaEntity ->
-            new DeveloperWithRepos(
-                    jpaEntity.name,
-                    repositories.apply(jpaEntity)
-            );
+    private final Function<DeveloperJpaEntity, Developer> toDDeveloperModel = jpaEntity -> new Developer(jpaEntity.id, jpaEntity.name);
+
+    private final Function<Developer, DeveloperJpaEntity> toJpaEntity = domainModel -> new DeveloperJpaEntity(UUID.randomUUID(), domainModel.name());
 
 }

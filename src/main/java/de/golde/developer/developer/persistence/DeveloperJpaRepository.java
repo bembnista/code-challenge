@@ -1,15 +1,13 @@
 package de.golde.developer.developer.persistence;
 
+import de.golde.developer.developer.model.DeveloperWithRepositories;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
 import java.util.UUID;
 
 @Repository
-public interface DeveloperJpaRepository extends JpaRepository<DeveloperJpaEntity, UUID> {
+interface DeveloperJpaRepository extends JpaRepository<DeveloperJpaEntity, UUID> {
 
-    @Query(value = "SELECT dev FROM DeveloperJpaEntity dev LEFT JOIN RepositoryJpaEntity r ON dev = r.developer")
-    List<DeveloperJpaEntity> findAllWithRepositories();
 }

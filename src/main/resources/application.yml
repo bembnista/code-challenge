@@ -1,0 +1,3 @@
+client:
+    git-hub:
+        base-url: "https://api.github.com"

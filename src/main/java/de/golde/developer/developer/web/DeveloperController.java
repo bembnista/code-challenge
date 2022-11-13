@@ -1,7 +1,7 @@
 package de.golde.developer.developer.web;
 
 import de.golde.developer.developer.DeveloperService;
-import de.golde.developer.developer.model.DeveloperWithRepos;
+import de.golde.developer.developer.model.DeveloperWithRepositories;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,7 +25,7 @@ public class DeveloperController {
     }
 
     @GetMapping
-    public HttpEntity<List<DeveloperWithRepos>> getDevelopers(@RequestParam(required = false) String language) {
+    public HttpEntity<List<DeveloperWithRepositories>> getDevelopers(@RequestParam(required = false) String language) {
         return service.getDevelopersWithRepositoriesByLanguage(language)
                 .collect(collectingAndThen(toList(), ResponseEntity::ok));
     }

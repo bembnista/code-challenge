@@ -1,6 +1,6 @@
 package de.golde.developer.developer;
 
-import de.golde.developer.developer.model.DeveloperWithRepos;
+import de.golde.developer.developer.model.DeveloperWithRepositories;
 import org.springframework.stereotype.Service;
 
 import java.util.stream.Stream;
@@ -14,7 +14,7 @@ public class DeveloperService {
         this.developerAdapter = developerAdapter;
     }
 
-    public Stream<DeveloperWithRepos> getDevelopersWithRepositoriesByLanguage(final String language) {
+    public Stream<DeveloperWithRepositories> getDevelopersWithRepositoriesByLanguage(final String language) {
         return developerAdapter.getDevelopersWithRepositories();
     }
 }

@@ -22,13 +22,15 @@ public class RepositoryJpaEntity {
     @Column(name = "id", nullable = false, unique = true)
     public UUID id;
 
+    @Column(name = "name", nullable = false)
+    public String name;
+
     @Column(name = "url", nullable = false)
     public String url;
 
-    @Column(name = "language", nullable = false)
+    @Column(name = "language")
     public String language;
 
-    @ManyToOne
-    public DeveloperJpaEntity developer;
-
+    @Column(name = "developer_id", nullable = false)
+    public UUID developer_id;
 }

@@ -1,13 +1,11 @@
 package de.golde.developer.developer.persistence;
 
-import de.golde.developer.repository.persistence.RepositoryJpaEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -25,9 +23,6 @@ public class DeveloperJpaEntity {
 
     @Column(name = "name", nullable = false)
     public String name;
-
-    @OneToMany(mappedBy = "developer")
-    private List<RepositoryJpaEntity> repositories;
 
 }
 
