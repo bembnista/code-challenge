@@ -1,7 +1,7 @@
 package de.golde.developer.repository.persistence;
 
 import de.golde.developer.developer.model.Repository;
-import de.golde.developer.repository.RepositoryAdapter;
+import de.golde.developer.repository.RepoRepositoryAdapter;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -11,11 +11,11 @@ import static java.util.stream.Collectors.collectingAndThen;
 import static java.util.stream.Collectors.toList;
 
 @Component
-public class RepositoryJpaRepositoryAdapter implements RepositoryAdapter {
+class RepositoryJpaRepoRepositoryAdapter implements RepoRepositoryAdapter {
 
     private final RepositoryJpaRepository repositoryJpaRepository;
 
-    public RepositoryJpaRepositoryAdapter(RepositoryJpaRepository repositoryJpaRepository) {
+    public RepositoryJpaRepoRepositoryAdapter(RepositoryJpaRepository repositoryJpaRepository) {
         this.repositoryJpaRepository = repositoryJpaRepository;
     }
 

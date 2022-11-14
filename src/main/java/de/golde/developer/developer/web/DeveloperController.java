@@ -1,7 +1,8 @@
 package de.golde.developer.developer.web;
 
 import de.golde.developer.developer.DeveloperService;
-import de.golde.developer.developer.model.DeveloperWithRepositories;
+import de.golde.developer.developer.model.Developer;
+import de.golde.developer.developer.model.DeveloperLanguageRank;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,8 +26,14 @@ public class DeveloperController {
     }
 
     @GetMapping
-    public HttpEntity<List<DeveloperWithRepositories>> getDevelopers(@RequestParam(required = false) String language) {
-        return service.getDevelopersWithRepositoriesByLanguage(language)
+    public HttpEntity<List<Developer>> getDevelopers(@RequestParam String language) {
+        return service.getDevelopersByLanguage(language)
+                .collect(collectingAndThen(toList(), ResponseEntity::ok));
+    }
+
+    @GetMapping("languages/overview")
+    public HttpEntity<List<DeveloperLanguageRank>> getDevelopersWithLanguageRanking() {
+        return service.getDevelopersWithLanguageRanking()
                 .collect(collectingAndThen(toList(), ResponseEntity::ok));
     }
 }

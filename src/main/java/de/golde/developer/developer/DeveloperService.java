@@ -1,6 +1,7 @@
 package de.golde.developer.developer;
 
-import de.golde.developer.developer.model.DeveloperWithRepositories;
+import de.golde.developer.developer.model.Developer;
+import de.golde.developer.developer.model.DeveloperLanguageRank;
 import org.springframework.stereotype.Service;
 
 import java.util.stream.Stream;
@@ -8,13 +9,17 @@ import java.util.stream.Stream;
 @Service
 public class DeveloperService {
 
-    private final DeveloperAdapter developerAdapter;
+    private final DeveloperRepositoryAdapter repositoryAdapter;
 
-    public DeveloperService(DeveloperAdapter developerAdapter) {
-        this.developerAdapter = developerAdapter;
+    public DeveloperService(DeveloperRepositoryAdapter repositoryAdapter) {
+        this.repositoryAdapter = repositoryAdapter;
     }
 
-    public Stream<DeveloperWithRepositories> getDevelopersWithRepositoriesByLanguage(final String language) {
-        return developerAdapter.getDevelopersWithRepositories();
+    public Stream<Developer> getDevelopersByLanguage(final String language) {
+        return repositoryAdapter.getDevelopersByLanguage(language);
+    }
+
+    public Stream<DeveloperLanguageRank> getDevelopersWithLanguageRanking() {
+        return repositoryAdapter.getDevelopersLanguageRanks();
     }
 }

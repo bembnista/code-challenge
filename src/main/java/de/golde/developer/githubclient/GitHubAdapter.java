@@ -1,4 +1,4 @@
-package de.golde.developer.github;
+package de.golde.developer.githubclient;
 
 import de.golde.developer.developer.model.Developer;
 import de.golde.developer.developer.model.Repository;

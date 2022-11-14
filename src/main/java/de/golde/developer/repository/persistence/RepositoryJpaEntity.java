@@ -1,6 +1,5 @@
 package de.golde.developer.repository.persistence;
 
-import de.golde.developer.developer.persistence.DeveloperJpaEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -32,5 +31,6 @@ public class RepositoryJpaEntity {
     public String language;
 
     @Column(name = "developer_id", nullable = false)
-    public UUID developer_id;
+    public UUID developerId;
+
 }

@@ -1,4 +1,4 @@
-package de.golde.developer.github;
+package de.golde.developer.githubclient;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
